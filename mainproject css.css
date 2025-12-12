@@ -1,0 +1,589 @@
+﻿/* -------------------- */
+/* 0. CSS Variables */
+/* -------------------- */
+:root {
+    --primary-color: #FF7F50;
+    --secondary-color: #333333;
+    --background-color: #ffffff;
+    --light-bg-color: #f8f8f8;
+    --font-family: 'Poppins', sans-serif;
+    --max-width: 1200px;
+}
+
+/* -------------------- */
+/* 1. Dark Mode Overrides */
+/* -------------------- */
+body.dark-mode {
+    --secondary-color: #f0f0f0;
+    --background-color: #121212;
+    --light-bg-color: #1e1e1e;
+    --primary-color: #FF7F50;
+}
+
+    /* Dark Mode Glass Nav */
+    body.dark-mode .navbar {
+        background-color: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Dark Mode Cards */
+    body.dark-mode .service-card,
+    body.dark-mode .stat-box,
+    body.dark-mode .testimonial-box,
+    body.dark-mode .employee-card {
+        background-color: #2a2a2a;
+        color: #f0f0f0;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    /* Dark Mode Inputs & Video */
+    body.dark-mode input,
+    body.dark-mode textarea {
+        background-color: #333;
+        color: white;
+        border: 1px solid #555;
+    }
+
+    body.dark-mode .video-container {
+        border: 5px solid #333;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    body.dark-mode .testimonial-box {
+        border-left: 5px solid #FF7F50;
+    }
+
+/* -------------------- */
+/* 2. Scrollbar Styling */
+/* -------------------- */
+html {
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color) var(--light-bg-color);
+}
+
+::-webkit-scrollbar {
+    width: 15px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--light-bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--primary-color);
+    border-radius: 10px;
+    border: 3px solid var(--light-bg-color);
+}
+
+    ::-webkit-scrollbar-thumb:hover {
+        background-color: #cc6633;
+    }
+
+/* -------------------- */
+/* 3. Global Styles */
+/* -------------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    color: var(--secondary-color);
+    background-color: var(--background-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+    transition: background-color 0.3s, color 0.3s;
+    padding-top: 130px; /* Space for fixed header */
+}
+
+a {
+    text-decoration: none;
+    color: var(--primary-color);
+    transition: color 0.3s;
+}
+
+    a:hover {
+        color: #cc6633;
+    }
+
+/* Animations */
+.reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s ease-out;
+}
+
+    .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+.cursor {
+    display: inline-block;
+    width: 3px;
+    background-color: var(--primary-color);
+    margin-left: 5px;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+.btn-primary {
+    display: inline-block;
+    padding: 12px 25px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: background-color 0.3s, transform 0.2s;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 15px rgba(255, 127, 80, 0.4);
+    border: none;
+    cursor: pointer;
+}
+
+    .btn-primary:hover {
+        background-color: #cc6633;
+        transform: translateY(-2px);
+    }
+
+/* -------------------- */
+/* 4. Navbar (Glass Effect) */
+/* -------------------- */
+.navbar {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 15px 40px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    flex-wrap: nowrap;
+    transition: background-color 0.3s;
+}
+
+.btn-about {
+    background-color: #007bff;
+    color: white !important;
+    padding: 12px 25px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-right: 0;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+}
+
+    .btn-about:hover {
+        background-color: #0056b3;
+    }
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    flex-shrink: 0;
+    gap: 15px;
+    margin-left: 30px;
+    margin-right: auto;
+}
+
+.logo-img {
+    height: 100px;
+    width: auto;
+    display: block;
+}
+
+.site-title-text {
+    font-size: 2.0rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    line-height: 1.1;
+    margin-top: 0;
+    white-space: nowrap;
+}
+
+.navbar nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-shrink: 0;
+    margin-left: 20px;
+}
+
+nav a {
+    font-weight: 500;
+    color: var(--secondary-color);
+    white-space: nowrap;
+}
+
+.btn-contact {
+    padding: 10px 20px;
+    border: 2px solid var(--primary-color);
+    border-radius: 5px;
+    color: var(--primary-color);
+    transition: background-color 0.3s, color 0.3s;
+    display: inline-block;
+    white-space: nowrap;
+    min-width: max-content;
+}
+
+    .btn-contact:hover {
+        background-color: var(--primary-color);
+        color: white;
+    }
+
+/* -------------------- */
+/* 5. Hero & Services */
+/* -------------------- */
+.hero-section {
+    display: flex;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 60px 40px 100px;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    background: linear-gradient(-45deg, #ffffff, #fff3e0, #ffecd2, #f5f5f5);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+}
+
+body.dark-mode .hero-section {
+    background: linear-gradient(-45deg, #121212, #1e1e1e, #2a2a2a, #000000);
+}
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.hero-content {
+    flex: 1;
+    max-width: 1200px;
+}
+
+    .hero-content h1 {
+        font-size: 3.5rem;
+        font-weight: 700;
+        line-height: 1.1;
+        margin-bottom: 20px;
+        color: inherit;
+        min-height: 140px;
+    }
+
+    .hero-content p {
+        font-size: 1.25rem;
+        margin-bottom: 30px;
+        max-width: 500px;
+    }
+
+.services-section {
+    padding: 80px 40px;
+    background-color: var(--light-bg-color);
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+    .services-section h2 {
+        font-size: 2.5rem;
+        margin-bottom: 40px;
+        color: inherit;
+    }
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.service-card {
+    background-color: var(--background-color);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s ease;
+    border: 1px solid transparent;
+}
+
+    .service-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(255, 127, 80, 0.15);
+        border-bottom: 5px solid var(--primary-color);
+    }
+
+    .service-card h3 {
+        color: var(--primary-color);
+        margin-bottom: 15px;
+        font-size: 1.5rem;
+    }
+
+/* -------------------- */
+/* 6. Video Section */
+/* -------------------- */
+.video-section {
+    padding: 60px 40px;
+    text-align: center;
+    background-color: var(--background-color);
+}
+
+.video-container {
+    max-width: 900px;
+    margin: 30px auto 0;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    border: 5px solid white;
+    transition: transform 0.3s;
+}
+
+    .video-container video {
+        width: 100%;
+        display: block;
+    }
+
+    .video-container:hover {
+        transform: scale(1.02);
+    }
+
+/* -------------------- */
+/* 7. Employee Section (NEW) */
+/* -------------------- */
+.employee-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: 4px solid var(--primary-color);
+    transition: transform 0.3s;
+}
+
+.employee-card {
+    background-color: var(--background-color);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s ease;
+    text-align: center;
+    border: 1px solid transparent;
+}
+
+    .employee-card:hover {
+        transform: translateY(-10px);
+        border-bottom: 5px solid var(--primary-color);
+    }
+
+        .employee-card:hover .employee-img {
+            transform: scale(1.1);
+        }
+
+.employee-role {
+    display: block;
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* -------------------- */
+/* 8. Contact, Stats, Testimonials */
+/* -------------------- */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 30px;
+    text-align: left;
+}
+
+    .contact-form input, .contact-form textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-family: inherit;
+        font-size: 1rem;
+    }
+
+        .contact-form input:focus, .contact-form textarea:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 5px rgba(255, 127, 80, 0.2);
+        }
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.stat-box {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    text-align: center;
+    border-top: 4px solid #FF7F50;
+    transition: transform 0.3s;
+}
+
+    .stat-box:hover {
+        transform: translateY(-5px);
+    }
+
+.stat-number {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #FF7F50;
+}
+
+.testimonial-box {
+    background-color: #f9f9f9;
+    padding: 30px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border-left: 5px solid #007bff;
+    text-align: left;
+    transition: background-color 0.3s;
+}
+
+    .testimonial-box:hover {
+        background-color: #eaf4ff;
+    }
+
+/* -------------------- */
+/* 9. Footer & Floating Buttons */
+/* -------------------- */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: var(--secondary-color);
+    color: white;
+    font-size: 0.9rem;
+}
+
+body.dark-mode footer {
+    background-color: #000;
+}
+
+#dark-mode-toggle, #back-to-top {
+    position: fixed;
+    right: 30px;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+}
+
+#dark-mode-toggle {
+    bottom: 30px;
+    background-color: var(--secondary-color);
+    color: var(--background-color);
+}
+
+    #dark-mode-toggle:hover {
+        transform: scale(1.1);
+    }
+
+#back-to-top {
+    bottom: 90px;
+    background-color: var(--primary-color);
+    color: white;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(20px);
+}
+
+    #back-to-top.visible {
+        opacity: 1;
+        pointer-events: all;
+        transform: translateY(0);
+    }
+
+    #back-to-top:hover {
+        transform: translateY(-5px);
+    }
+
+/* Mobile Responsive */
+@media (max-width: 1200px) {
+    .site-title-text {
+        white-space: normal;
+        font-size: 1.5rem;
+    }
+
+    .logo-img {
+        height: 80px;
+    }
+}
+
+@media (max-width: 900px) {
+    body {
+        padding-top: 0;
+    }
+
+    .navbar {
+        position: relative;
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+        background-color: var(--background-color);
+    }
+
+    .logo-link {
+        margin: 0 auto;
+        flex-direction: column;
+    }
+
+    .navbar nav {
+        margin: 0 auto;
+    }
+
+    .btn-about {
+        margin: 0 auto;
+    }
+}
